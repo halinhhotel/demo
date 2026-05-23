@@ -3,40 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo 3: Iridescent Holographic</title>
+    <title>Demo 4: Glassmorphism Frosted</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .holo-bg {
-            background: linear-gradient(125deg, #fef08a, #f472b6, #38bdf8, #c084fc);
-            background-size: 400% 400%;
-            animation: gradientMove 12s ease infinite;
-        }
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        .animate-float { animation: float 4s ease-in-out infinite; }
+        .glass-panel { background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.6); }
+        .shine-effect { position: relative; overflow: hidden; }
+        .shine-effect::after { content: ''; position: absolute; top: -50%; left: -60%; width: 30%; height: 200%; background: rgba(255,255,255,0.4); transform: rotate(30deg); transition: 0.7s; opacity: 0; }
+        .shine-effect:hover::after { left: 130%; opacity: 1; }
     </style>
 </head>
-<body class="holo-bg min-h-screen flex flex-col items-center justify-center p-6">
-    <div class="max-w-xl w-full bg-white/70 backdrop-blur-2xl rounded-[40px] p-8 border border-white/50 shadow-[0_30px_60px_rgba(0,0,0,0.05)] text-center animate-float">
-        <h1 class="text-4xl font-extrabold tracking-tight text-indigo-950 mb-2">Hạ Linh Hotel</h1>
-        <p class="text-indigo-900/60 font-medium text-sm mb-6">Trải nghiệm tương lai nghỉ dưỡng tươi sáng</p>
+<body class="bg-gradient-to-br from-amber-100 via-sky-100 to-purple-100 min-h-screen flex flex-col items-center justify-center p-6">
+    <div class="max-w-xl w-full glass-panel rounded-[35px] p-8 shadow-2xl text-center">
+        <h1 class="text-3xl font-black text-slate-900 tracking-tight uppercase mb-2">Hạ Linh Bãi Sau</h1>
+        <div class="w-12 h-1 bg-gradient-to-r from-sky-400 to-amber-400 mx-auto mb-6 rounded-full"></div>
         
-        <div class="bg-white/80 rounded-3xl p-5 border border-white shadow-sm hover:shadow-2xl transition-all duration-300">
-            <img src="https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=600" class="w-full h-44 object-cover rounded-2xl mb-4">
-            <div class="text-left">
-                <h3 class="text-lg font-bold text-indigo-950">New Moon Room</h3>
-                <p class="text-xs text-slate-500 mt-1">Đầy đủ tiện nghi thông minh điều khiển bằng giọng nói.</p>
-                <div class="mt-6 flex justify-between items-center">
-                    <span class="text-indigo-600 font-extrabold text-lg">250k <span class="text-xs text-slate-400 font-normal">/ ngày</span></span>
-                    <button class="bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold text-xs px-5 py-3 rounded-2xl shadow-lg shadow-purple-500/20 hover:opacity-90 transition-opacity uppercase">Đặt Phòng</button>
-                </div>
+        <div class="glass-panel rounded-2xl p-4 text-left shadow-sm shine-effect bg-white/30 cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?w=600" class="w-full h-44 object-cover rounded-xl mb-4">
+            <h3 class="text-lg font-bold text-slate-800">Half Moon Room</h3>
+            <p class="text-xs text-slate-600 mt-1">Ban công ngắm trọn bình minh Bãi Sau siêu thơ mộng.</p>
+            <div class="mt-4 pt-3 border-t border-white/40 flex justify-between items-center">
+                <span class="text-slate-700 text-sm font-bold">📐 28m²</span>
+                <span class="text-sm font-black bg-white/80 px-3 py-1.5 rounded-lg text-slate-900 shadow-sm">280.000đ</span>
             </div>
         </div>
     </div>
