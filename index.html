@@ -420,15 +420,15 @@
         <input type="tel" id="phone" required placeholder="090xxxxxxx" class="w-full bg-white border border-purple-100 rounded-2xl px-4 md:px-6 py-3.5 md:py-4 mt-1.5 outline-none focus:border-pink-500 font-bold text-indigo-950 shadow-sm text-sm md:text-base">
     </div>
 
-<div class="col-span-2 md:col-span-1">
-    <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider" data-i18n="f_room">Hạng phòng</label>
-    <select id="room" class="w-full bg-white border border-purple-100 rounded-2xl px-4 md:px-6 py-3.5 md:py-4 mt-1.5 outline-none focus:border-pink-500 font-bold text-indigo-950 shadow-sm text-sm md:text-base">
-        <option class="bg-white text-indigo-950" value="New Moon" data-i18n="opt_r1">New Moon (Tối đa 2 người)</option>
-        <option class="bg-white text-indigo-950" value="Half Moon" data-i18n="opt_r2">Half Moon (Tối đa 4 người)</option>
-        <option class="bg-white text-indigo-950" value="Full Moon" selected data-i18n="opt_r3">Full Moon (Tối đa 4 người)</option>
-        <option class="bg-white text-indigo-950" value="Supernova" data-i18n="opt_r4">Supernova (Tối đa 6 người)</option>
-    </select>
-</div>
+    <div class="col-span-2 md:col-span-1">
+        <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider" data-i18n="f_room">Hạng phòng</label>
+        <select id="room" class="w-full bg-white border border-purple-100 rounded-2xl px-4 md:px-6 py-3.5 md:py-4 mt-1.5 outline-none focus:border-pink-500 font-bold text-indigo-950 shadow-sm text-sm md:text-base">
+            <option class="bg-white text-indigo-950" value="New Moon (Mẹo: Tối đa 2 người)" data-i18n="opt_r1">New Moon (Tối đa 2 người)</option>
+            <option class="bg-white text-indigo-950" value="Half Moon (Mẹo: Tối đa 4 người)" data-i18n="opt_r2">Half Moon (Tối đa 4 người)</option>
+            <option class="bg-white text-indigo-950" value="Full Moon (Mẹo: Tối đa 4 người)" selected data-i18n="opt_r3">Full Moon (Tối đa 4 người)</option>
+            <option class="bg-white text-indigo-950" value="Supernova (Mẹo: Tối đa 6 người)" data-i18n="opt_r4">Supernova (Tối đa 6 người)</option>
+        </select>
+    </div>
 
     <div class="col-span-2 md:col-span-1">
         <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider" data-i18n="f_pets">Mang theo vật nuôi?</label>
@@ -605,6 +605,36 @@ function checkPets() {
     }
 }
 
+// HÀM XỬ LÝ ĐẶT PHÒNG ĐỒNG BỘ - CHỐNG BỊ TRÌNH DUYỆT CHẶN POPUP ZALO
+function handleBooking(e) {
+    // 1. Chặn hành vi reset trang mặc định của Form
+    e.preventDefault();
+    
+    // 2. Lấy chính xác dữ liệu từ các ô nhập liệu
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const room = document.getElementById('room').value;
+    const checkin = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    
+    // 3. Xử lý trạng thái vật nuôi sang chữ thực chiến gửi Zalo
+    const petValue = document.getElementById('pets').value;
+    const petStatusText = (petValue === 'yes') ? "Có mang theo vật nuôi (Yêu cầu báo phí phụ thu)" : "Không mang theo vật nuôi";
+
+    // 4. Cấu trúc nội dung tin nhắn gửi đi
+    const msg = `[HẠ LINH HOTEL - ĐẶT PHÒNG NHANH]\n- Khách hàng: ${name}\n- Số điện thoại: ${phone}\n- Hạng phòng đã chọn: ${room}\n- Thú cưng đi kèm: ${petStatusText}\n- Thời gian lưu trú: Từ ngày ${checkin} đến ngày ${checkout}`;
+    
+    // 5. Thực hiện copy vào bộ nhớ tạm KHÔNG DÙNG AWAIT (Chạy ngầm đồng bộ)
+    try { 
+        navigator.clipboard.writeText(msg); 
+    } catch (err) {
+        console.log("Trình duyệt không hỗ trợ tự động copy ngầm");
+    }
+    
+    // 6. Kích hoạt mở Zalo ngay lập tức (Trình duyệt sẽ không chặn vì luồng chạy đồng bộ hoàn toàn)
+    window.open(`https://zalo.me/0365203109?text=${encodeURIComponent(msg)}`, '_blank');
+}
+        
         let currentLang = 'vi';
         function toggleLang() {
             currentLang = currentLang === 'vi' ? 'en' : 'vi';
@@ -624,80 +654,35 @@ const fpConfig = {
     disableMobile: true // BẮT BUỘC THÊM DÒNG NÀY: Ép mobile dùng giao diện Flatpickr, không dùng bộ chọn hệ thống
 };
 
-<script>
-// 1. CẤU HÌNH LỊCH FLATPICKR CHẠY TRỰC TIẾP (KHÓA NGÀY A -> A+1)
-// Khai báo biến lưu trữ cấu hình lịch
-let checkinPicker, checkoutPicker;
-
-// Kiểm tra ngôn ngữ tiếng Việt an toàn chống crash
-const flatpickrLocale = (typeof flatpickr !== 'undefined' && flatpickr.l10ns && flatpickr.l10ns.vn) ? 'vn' : 'default';
-
-try {
-    // Khởi tạo lịch Trả Phòng trước
-    checkoutPicker = flatpickr("#checkout", {
-        locale: flatpickrLocale,
-        dateFormat: "d/m/Y",
-        minDate: "today"
-    });
-
-    // Khởi tạo lịch Nhận Phòng và thiết lập liên kết ràng buộc sang lịch Trả
-    checkinPicker = flatpickr("#checkin", {
-        locale: flatpickrLocale,
-        dateFormat: "d/m/Y",
-        minDate: "today",
-        onChange: function(selectedDates, dateStr, instance) {
-            if (selectedDates[0] && checkoutPicker) {
-                // Tính toán ngày kế tiếp (Ngày nhận phòng + 1 ngày)
-                const nextDay = new Date(selectedDates[0]);
-                nextDay.setDate(nextDay.getDate() + 1);
-                
-                // Ép lịch Trả Phòng chỉ được chọn từ ngày kế tiếp trở đi
-                checkoutPicker.set("minDate", nextDay);
-                
-                // Nếu khách lỡ chọn ngày trả nhỏ hơn hoặc bằng ngày nhận, tự động xóa đi để bắt chọn lại
-                if (checkoutPicker.selectedDates[0] && checkoutPicker.selectedDates[0] <= selectedDates[0]) {
-                    checkoutPicker.clear();
-                }
-            }
-        }
-    });
-} catch (err) {
-    console.log("Lỗi khởi tạo lịch: ", err);
-}
-
-// 2. HÀM XỬ LÝ GỬI TIN ZALO - SIÊU SẠCH & KHÔNG CHẶN POPUP
+flatpickr("#checkin", fpConfig);
+flatpickr("#checkout", fpConfig);
+        
+// THAY THẾ TOÀN BỘ HÀM HANDLEBOOKING CŨ BẰNG ĐOẠN ĐỒNG BỘ NÀY:
 function handleBooking(e) {
-    e.preventDefault(); // Chặn tải lại trang mặc định
+    // 1. Ngăn chặn hành vi tải lại trang mặc định của Form
+    e.preventDefault();
     
-    // Thu thập dữ liệu từ các ô nhập
+    // 2. Thu thập chính xác toàn bộ dữ liệu khách nhập
     const name = document.getElementById('name').value;
     const phone = document.getElementById('phone').value;
+    const room = document.getElementById('room').value;
+    const pets = document.getElementById('pets').value;
     const checkin = document.getElementById('checkin').value;
     const checkout = document.getElementById('checkout').value;
     
-    // TỰ ĐỘNG LỌC PHÒNG: Gọt sạch mọi ký tự từ dấu ngoặc đơn trở đi
-    let roomRaw = document.getElementById('room').value;
-    let room = roomRaw.split(' (')[0].trim(); 
-
-    // TỰ ĐỘNG DỊCH VẬT NUÔI: Ép cứng chữ "Có" hoặc "Không" tiếng Việt cố định
-    const petValue = document.getElementById('pets').value;
-    const petStatusText = (petValue === 'yes') ? "Có" : "Không";
+    // 3. Thiết lập nội dung tin nhắn cấu trúc sạch gửi Zalo
+    const msg = `[HẠ LINH HOTEL - ĐẶT PHÒNG NHANH]\n- Khách: ${name}\n- SĐT: ${phone}\n- Hạng phòng: ${room}\n- Vật nuôi: ${pets}\n- Ngày ở: ${checkin} đến ${checkout}`;
     
-    // Cấu trúc nội dung tin nhắn gửi cho khách sạn
-    const msg = `[HẠ LINH HOTEL - ĐẶT PHÒNG NHANH]\n- Khách: ${name}\n- SĐT: ${phone}\n- Hạng phòng: ${room}\n- Vật nuôi: ${petStatusText}\n- Ngày ở: ${checkin} đến ${checkout}`;
-    
-    // Sao chép ngầm vào bộ nhớ tạm
+    // 4. Kích hoạt sao chép ngầm vào bộ nhớ tạm (Không dùng await để lách bộ chặn popup)
     try {
         navigator.clipboard.writeText(msg);
     } catch (err) {
         console.log("Trình duyệt không hỗ trợ sao chép tự động");
     }
     
-    // Mở Zalo đẩy tin nhắn đi mượt mà
+    // 5. Mở tab Zalo ngay lập tức - Bảo đảm mượt mà trên cả Mobile và Desktop
     window.open(`https://zalo.me/0365203109?text=${encodeURIComponent(msg)}`, '_blank');
 }
-</script>
-    
         // Back to top logic
         const btt = document.getElementById('backToTop');
         window.addEventListener('scroll', () => { if(window.scrollY > 300) { btt.style.opacity = '1'; btt.style.pointerEvents = 'auto'; } else { btt.style.opacity = '0'; btt.style.pointerEvents = 'none'; } });
