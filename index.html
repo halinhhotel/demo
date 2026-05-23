@@ -657,13 +657,32 @@ const fpConfig = {
 flatpickr("#checkin", fpConfig);
 flatpickr("#checkout", fpConfig);
         
-        async function handleBooking(e) {
-            e.preventDefault();
-            const msg = `[HẠ LINH HOTEL]\n- Khách: ${document.getElementById('name').value}\n- SĐT: ${document.getElementById('phone').value}\n- Phòng: ${document.getElementById('room').value}\n- Người: ${document.getElementById('guests').value}\n- Ngày: ${document.getElementById('checkin').value} đến ${document.getElementById('checkout').value}`;
-            try { await navigator.clipboard.writeText(msg); } catch (err) {}
-            window.open(`https://zalo.me/0365203109?text=${encodeURIComponent(msg)}`, '_blank');
-        }
-
+// THAY THẾ TOÀN BỘ HÀM HANDLEBOOKING CŨ BẰNG ĐOẠN ĐỒNG BỘ NÀY:
+function handleBooking(e) {
+    // 1. Ngăn chặn hành vi tải lại trang mặc định của Form
+    e.preventDefault();
+    
+    // 2. Thu thập chính xác toàn bộ dữ liệu khách nhập
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const room = document.getElementById('room').value;
+    const pets = document.getElementById('pets').value;
+    const checkin = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    
+    // 3. Thiết lập nội dung tin nhắn cấu trúc sạch gửi Zalo
+    const msg = `[HẠ LINH HOTEL - ĐẶT PHÒNG NHANH]\n- Khách: ${name}\n- SĐT: ${phone}\n- Hạng phòng: ${room}\n- Vật nuôi: ${pets}\n- Ngày ở: ${checkin} đến ${checkout}`;
+    
+    // 4. Kích hoạt sao chép ngầm vào bộ nhớ tạm (Không dùng await để lách bộ chặn popup)
+    try {
+        navigator.clipboard.writeText(msg);
+    } catch (err) {
+        console.log("Trình duyệt không hỗ trợ sao chép tự động");
+    }
+    
+    // 5. Mở tab Zalo ngay lập tức - Bảo đảm mượt mà trên cả Mobile và Desktop
+    window.open(`https://zalo.me/0365203109?text=${encodeURIComponent(msg)}`, '_blank');
+}
         // Back to top logic
         const btt = document.getElementById('backToTop');
         window.addEventListener('scroll', () => { if(window.scrollY > 300) { btt.style.opacity = '1'; btt.style.pointerEvents = 'auto'; } else { btt.style.opacity = '0'; btt.style.pointerEvents = 'none'; } });
