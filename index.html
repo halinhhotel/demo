@@ -184,8 +184,8 @@
             <a href="#" class="text-lg md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-600 tracking-tighter uppercase font-lucky">🌙 HẠ LINH HOTEL</a>
             <div class="hidden lg:flex space-x-8 font-bold text-indigo-950/70 text-sm">
                 <a href="#rooms" class="hover:text-pink-600 transition" data-i18n="nav_rooms">Xem phòng</a>
+                <a href="#offers" class="hover:text-pink-600 transition" data-i18n="nav_offers">Khuyến mãi</a>
                 <a href="#reviews" class="hover:text-pink-600 transition" data-i18n="nav_reviews">Đánh giá</a>
-                <a href="#booking" class="hover:text-pink-600 transition" data-i18n="nav_contact">Liên hệ</a>
             </div>
             <div class="flex items-center gap-2 md:gap-4">
                 <button onclick="toggleLang()" class="bg-white/80 border border-purple-100 px-2 md:px-3 py-1.5 rounded-full text-[10px] md:text-xs font-bold flex items-center gap-2 hover:bg-white transition text-indigo-950 shadow-sm">
@@ -213,7 +213,7 @@
 
     <section id="rooms" class="py-12 md:py-20 max-w-7xl mx-auto px-4 relative z-10">
         <div class="mb-10 md:mb-16 text-center">
-            <h2 class="text-3xl md:text-6xl font-extrabold text-indigo-950 mb-4 md:mb-6 tracking-tight" data-i18n="rooms_title">Hạng Phòng Lunar</h2>
+            <h2 class="text-3xl md:text-6xl font-extrabold text-indigo-950 mb-4 md:mb-6 tracking-tight" data-i18n="rooms_title">Hạng Phòng</h2>
             <div class="inline-block bg-rose-50 border border-rose-200 px-4 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl shadow-sm">
                 <p class="text-rose-600 font-bold text-xs md:text-base" data-i18n="price_alert">⚠️ Giá ngày thường, không áp dụng Cuối tuần & Lễ/Tết.</p>
             </div>
@@ -334,7 +334,40 @@
             </div>
         </div>
     </section>
+    
+<section id="offers" class="py-12 md:py-20 max-w-7xl mx-auto px-4 relative z-10">
+    <div class="mb-10 text-center">
+        <h2 class="text-3xl md:text-6xl font-extrabold text-indigo-950 mb-4 tracking-tight" data-i18n="offers_title">Ưu Đãi Đặc Biệt</h2>
+        <p class="text-purple-600 font-bold text-sm uppercase tracking-wide" data-i18n="offers_sub">Đặt trực tiếp để nhận ngay giá tốt nhất bãi sau</p>
+    </div>
 
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="glass-box rounded-[30px] p-6 md:p-8 border-l-4 border-pink-500 flex flex-col justify-between hover:shadow-xl transition-all duration-300">
+            <div>
+                <div class="inline-block bg-pink-100 text-pink-600 font-black text-xs px-3 py-1 rounded-full mb-4" data-i18n="badge_direct">ĐẶT TRỰC TIẾP</div>
+                <h3 class="text-2xl font-bold text-indigo-950 mb-3" data-i18n="promo1_title">Ưu đãi đặt phòng qua Zalo & Livechat</h3>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6" data-i18n="promo1_desc">Giảm ngay 10% trên tổng hóa đơn phòng cho tất cả các ngày trong tuần khi liên hệ trực tiếp với chúng tôi qua nút Zalo hoặc cửa sổ Chat hỗ trợ góc màn hình.</p>
+            </div>
+            <div class="flex items-center justify-between border-t border-purple-100 pt-4">
+                <div class="text-pink-600 font-black text-xl md:text-2xl">-10% TỔNG BILL</div>
+                <a href="https://zalo.me/0365203109" target="_blank" class="bg-gradient-to-r from-pink-500 to-purple-600 text-white px-5 py-2 rounded-xl font-bold text-xs hover:opacity-90 transition shadow-md" data-i18n="btn_claim">NHẬN NGAY</a>
+            </div>
+        </div>
+
+        <div class="glass-box rounded-[30px] p-6 md:p-8 border-l-4 border-indigo-400 flex flex-col justify-between opacity-80 border-dashed border-2">
+            <div>
+                <div class="inline-block bg-indigo-100 text-indigo-600 font-black text-xs px-3 py-1 rounded-full mb-4" data-i18n="badge_coming">SẮP DIỄN RA</div>
+                <h3 class="text-2xl font-bold text-indigo-950 mb-3" data-i18n="promo2_title">Ưu đãi Mùa Du Lịch Hè / Combo Gia Đình</h3>
+                <p class="text-slate-500 text-sm leading-relaxed mb-6" data-i18n="promo2_desc">Chương trình tri ân dành riêng cho các hộ gia đình thuê từ 3 phòng trở lên hoặc lưu trú dài ngày tại Vũng Tàu. Hệ thống đang tối ưu hạn mức ưu đãi.</p>
+            </div>
+            <div class="flex items-center justify-between border-t border-indigo-100 pt-4">
+                <div class="text-indigo-500 font-bold text-sm italic" data-i18n="promo2_status">Đang chuẩn bị...</div>
+                <button disabled class="bg-slate-300 text-white px-5 py-2 rounded-xl font-bold text-xs cursor-not-allowed" data-i18n="btn_waiting">CHỜ KHỞI CHẠY</button>
+            </div>
+        </div>
+    </div>
+</section>
+    
     <section id="reviews" class="py-20 bg-white/20 backdrop-blur-md border-y border-white/40">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-end mb-10">
@@ -498,45 +531,56 @@
             }
         });
 
-        // Language & UI Logic (Giữ nguyên gốc)
-        const i18n = {
-            vi: { 
-                nav_rooms: "Phòng nghỉ", nav_reviews: "Đánh giá", nav_contact: "Liên hệ", nav_book: "Đặt ngay", 
-                hero_sub: '"Nghỉ ngơi êm ái - Trọn vẹn niềm vui"', rooms_title: "Hạng Phòng Lunar", 
-                price_alert: "⚠️ Không bao gồm ngày Cuối tuần & Lễ/Tết. Liên hệ Zalo để được báo giá.", 
-                guests: "Người lớn", weekday: "Ngày thường", btn_choose: "CHỌN PHÒNG", btn_book_now: "ĐẶT PHÒNG NGAY", 
-                popular: "PHỔ BIẾN NHẤT", review_title: "Khách Hàng Đánh Giá", form_title: "ĐẶT PHÒNG NHANH", 
-                f_name: "Họ và Tên", f_phone: "Số điện thoại", f_room: "Hạng phòng", f_guests: "Số người", 
-                f_checkin: "Ngày nhận", f_checkout: "Ngày trả", f_submit: "XÁC NHẬN & MỞ CHAT ZALO", 
-                p_unit: "Người", r1_name: "New Moon (Trăng Non)", r1_type: "Phòng Đơn Tiêu Chuẩn - 1 Giường Đôi", 
-                r2_name: "Half Moon (Trăng Khuyết)", r2_type: "Phòng Đôi Tiêu Chuẩn - 2 Giường Đôi", 
-                r3_name: "Full Moon (Trăng Tròn)", r3_type: "Phòng Lớn Cho Gia Đình - 2 Giường Đôi", 
-                r4_name: "Supernova (Siêu Tân Tinh)", r4_type: "Phòng Tập Thể - 3 Giường Đôi",
-                header_sub: "Khách sạn giá tốt tại Bãi sau Vũng Tàu",
-                f_note: "(*) Sau khi nhấn, thông tin đã được tự động sao chép.<br>Bạn chỉ cần \"Dán\" (Paste) vào ô chat Zalo khách sạn.",
-                c1_text: "Phòng sạch sẽ, gần biển, chủ khách sạn rất nhiệt tình. Sẽ quay lại!",
-                c2_text: "Giá cả hợp lý, vị trí thuận tiện ngay trung tâm bãi sau. Rất hài lòng.",
-                c3_text: "Phục vụ chuyên nghiệp, phòng đúng như hình."
-            },
-            en: { 
-                nav_rooms: "Rooms", nav_reviews: "Reviews", nav_contact: "Contact", nav_book: "Book Now", 
-                hero_sub: '"Soft Sleep - Pure Joy"', rooms_title: "Lunar Rooms", 
-                price_alert: "⚠️ Weekends & Holidays excluded. Contact Zalo for rates.", 
-                guests: "Adults", weekday: "Weekdays", btn_choose: "CHOOSE ROOM", btn_book_now: "BOOK NOW", 
-                popular: "MOST POPULAR", review_title: "Guest Reviews", form_title: "QUICK BOOKING", 
-                f_name: "Full Name", f_phone: "Phone", f_room: "Room Type", f_guests: "Guests", 
-                f_checkin: "Check-in", f_checkout: "Check-out", f_submit: "CONFIRM & CHAT ZALO", 
-                p_unit: "Guests", r1_name: "New Moon", r1_type: "Standard Single Room", 
-                r2_name: "Half Moon", r2_type: "Standard Double Room",
-                r3_name: "Full Moon", r3_type: "Family Deluxe",
-                r4_name: "Supernova", r4_type: "Family Suite",
-                header_sub: "Affordable hotels in Vung Tau's Back Beach area",
-                f_note: "(*) After clicking confirm, info is automatically copied.<br>Just \"Paste\" it into the Hotel's Zalo chat.",
-                c1_text: "Clean rooms, near the beach, very enthusiastic host. Will come back!",
-                c2_text: "Reasonable price, convenient location in the center of Back Beach. Very satisfied.",
-                c3_text: "Professional service, the room looked exactly like the photos."
-            }
-        };
+const i18n = {
+    vi: { 
+        nav_rooms: "Phòng nghỉ", nav_offers: "Khuyến mãi", nav_reviews: "Đánh giá", nav_contact: "Đặt phòng", nav_book: "Đặt ngay", 
+        hero_sub: '"Nghỉ ngơi êm ái - Trọn vẹn niềm vui"', rooms_title: "Hạng Phòng Lunar", 
+        price_alert: "⚠️ Không bao gồm ngày Cuối tuần & Lễ/Tết. Liên hệ Zalo để được báo giá.", 
+        guests: "Người lớn", weekday: "Ngày thường", btn_choose: "CHỌN PHÒNG", btn_book_now: "ĐẶT PHÒNG NGAY", 
+        popular: "PHỔ BIẾN NHẤT", review_title: "Khách Hàng Đánh Giá", form_title: "ĐẶT PHÒNG NHANH", 
+        f_name: "Họ và Tên", f_phone: "Số điện thoại", f_room: "Hạng phòng", f_guests: "Số người", 
+        f_checkin: "Ngày nhận", f_checkout: "Ngày trả", f_submit: "XÁC NHẬN & MỞ CHAT ZALO", 
+        p_unit: "Người", r1_name: "New Moon (Trăng Non)", r1_type: "Phòng Đơn Tiêu Chuẩn - 1 Giường Đôi", 
+        r2_name: "Half Moon (Trăng Khuyết)", r2_type: "Phòng Đôi Tiêu Chuẩn - 2 Giường Đôi", 
+        r3_name: "Full Moon (Trăng Tròn)", r3_type: "Phòng Lớn Cho Gia Đình - 2 Giường Đôi", 
+        r4_name: "Supernova (Siêu Tân Tinh)", r4_type: "Phòng Tập Thể - 3 Giường Đôi",
+        header_sub: "Khách sạn giá tốt tại Bãi sau Vũng Tàu",
+        f_note: "(*) Sau khi nhấn, thông tin đã được tự động sao chép.<br>Bạn chỉ cần \"Dán\" (Paste) vào ô chat Zalo khách sạn.",
+        c1_text: "Phòng sạch sẽ, gần biển, chủ khách sạn rất nhiệt tình. Sẽ quay lại!",
+        c2_text: "Giá cả hợp lý, vị trí thuận tiện ngay trung tâm bãi sau. Rất hài lòng.",
+        c3_text: "Phục vụ chuyên nghiệp, phòng đúng như hình.",
+        // Thêm nhãn mới cho mục Khuyến mãi
+        offers_title: "Ưu Đãi Đặc Biệt", offers_sub: "Đặt trực tiếp để nhận ngay giá tốt nhất bãi sau",
+        badge_direct: "ĐẶT TRỰC TIẾP", badge_coming: "SẮP DIỄN RA",
+        promo1_title: "Ưu đãi đặt phòng qua Zalo & Livechat", promo1_desc: "Giảm ngay 10% trên tổng hóa đơn phòng cho tất cả các ngày trong tuần khi liên hệ trực tiếp với chúng tôi qua nút Zalo hoặc cửa sổ Chat hỗ trợ góc màn hình.",
+        promo2_title: "Ưu đãi Mùa Du Lịch Hè / Combo Gia Đình", promo2_desc: "Chương trình tri ân dành riêng cho các hộ gia đình thuê từ 3 phòng trở lên hoặc lưu trú dài ngày tại Vũng Tàu. Hệ thống đang tối ưu hạn mức ưu đãi.",
+        btn_claim: "NHẬN NGAY", btn_waiting: "CHỜ KHỞI CHẠY", promo2_status: "Đang chuẩn bị..."
+    },
+    en: { 
+        nav_rooms: "Rooms", nav_offers: "Special Offers", nav_reviews: "Reviews", nav_contact: "Booking", nav_book: "Book Now", 
+        hero_sub: '"Soft Sleep - Pure Joy"', rooms_title: "Lunar Rooms", 
+        price_alert: "⚠️ Weekends & Holidays excluded. Contact Zalo for rates.", 
+        guests: "Adults", weekday: "Weekdays", btn_choose: "CHOOSE ROOM", btn_book_now: "BOOK NOW", 
+        popular: "MOST POPULAR", review_title: "Guest Reviews", form_title: "QUICK BOOKING", 
+        f_name: "Full Name", f_phone: "Phone", f_room: "Room Type", f_guests: "Guests", 
+        f_checkin: "Check-in", f_checkout: "Check-out", f_submit: "CONFIRM & CHAT ZALO", 
+        p_unit: "Guests", r1_name: "New Moon", r1_type: "Standard Single Room", 
+        r2_name: "Half Moon", r2_type: "Standard Double Room",
+        r3_name: "Full Moon", r3_type: "Family Deluxe",
+        r4_name: "Supernova", r4_type: "Family Suite",
+        header_sub: "Affordable hotels in Vung Tau's Back Beach area",
+        f_note: "(*) After clicking confirm, info is automatically copied.<br>Just \"Paste\" it into the Hotel's Zalo chat.",
+        c1_text: "Clean rooms, near the beach, very enthusiastic host. Will come back!",
+        c2_text: "Reasonable price, convenient location in the center of Back Beach. Very satisfied.",
+        c3_text: "Professional service, the room looked exactly like the photos.",
+        // Thêm nhãn tiếng Anh mới
+        offers_title: "Special Offers", offers_sub: "Book directly to get the best rates in Back Beach",
+        badge_direct: "DIRECT BOOKING", badge_coming: "COMING SOON",
+        promo1_title: "Discount for Zalo & Livechat bookings", promo1_desc: "Get an immediate 10% discount on your total room bill for all weekdays when contacting us directly via Zalo or the Livechat window.",
+        promo2_title: "Summer Vacation / Family Combo Deal", promo2_desc: "Special appreciation program for families booking 3+ rooms or long-term stays in Vung Tau. Promotion rates are being optimized.",
+        btn_claim: "CLAIM NOW", btn_waiting: "COMING SOON", promo2_status: "Preparing..."
+    }
+};
 
         let currentLang = 'vi';
         function toggleLang() {
