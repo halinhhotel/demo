@@ -420,24 +420,27 @@
                     <input type="tel" id="phone" required class="w-full bg-white/80 border border-purple-100 rounded-2xl px-4 md:px-6 py-3.5 md:py-4 mt-1.5 outline-none focus:border-pink-500 font-bold transition text-indigo-950 shadow-sm text-sm md:text-base">
                 </div>
 
-                <div class="col-span-2 md:col-span-1">
-                    <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider" data-i18n="f_room">Hạng phòng</label>
-                    <select id="room" class="w-full bg-white border border-purple-100 rounded-2xl px-4 md:px-6 py-3.5 md:py-4 mt-1.5 outline-none focus:border-pink-500 font-bold text-indigo-950 shadow-sm text-sm md:text-base">
-                        <option class="bg-white text-indigo-950">New Moon (Trăng Non)</option>
-                        <option class="bg-white text-indigo-950">Half Moon (Trăng Khuyết)</option>
-                        <option class="bg-white text-indigo-950" selected>Full Moon (Trăng Tròn)</option>
-                        <option class="bg-white text-indigo-950">Supernova (Siêu Tân Tinh)</option>
-                    </select>
-                </div>
+<div class="col-span-2 md:col-span-1">
+    <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider" data-i18n="f_room">Hạng phòng</label>
+    <select id="room" class="w-full bg-white border border-purple-100 rounded-2xl px-4 md:px-6 py-3.5 md:py-4 mt-1.5 outline-none focus:border-pink-500 font-bold text-indigo-950 shadow-sm text-sm md:text-base">
+        <option class="bg-white text-indigo-950" value="New Moon (Tối đa 2 người)" data-i18n="opt_r1">New Moon (Tối đa 2 người)</option>
+        <option class="bg-white text-indigo-950" value="Half Moon (Tối đa 4 người)" data-i18n="opt_r2">Half Moon (Tối đa 4 người)</option>
+        <option class="bg-white text-indigo-950" value="Full Moon (Tối đa 4 người)" selected data-i18n="opt_r3">Full Moon (Tối đa 4 người)</option>
+        <option class="bg-white text-indigo-950" value="Supernova (Tối đa 6 người)" data-i18n="opt_r4">Supernova (Tối đa 6 người)</option>
+    </select>
+</div>
 
-                <div class="col-span-2 md:col-span-1">
-                    <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider" data-i18n="f_guests">Số người</label>
-                    <select id="guests" class="w-full bg-white border border-purple-100 rounded-2xl px-4 md:px-6 py-3.5 md:py-4 mt-1.5 outline-none font-bold text-indigo-950 shadow-sm text-sm md:text-base">
-                        <option class="bg-white text-indigo-950" value="2">2 <span data-i18n="p_unit">Người</span></option>
-                        <option class="bg-white text-indigo-950" value="4">4 <span data-i18n="p_unit">Người</span></option>
-                        <option class="bg-white text-indigo-950" value="6">6 <span data-i18n="p_unit">Người (Tối đa)</span></option>
-                    </select>
-                </div>
+<div class="col-span-2 md:col-span-1">
+    <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider" data-i18n="f_pets">Mang theo vật nuôi?</label>
+    <select id="pets" onchange="checkPets()" class="w-full bg-white border border-purple-100 rounded-2xl px-4 md:px-6 py-3.5 md:py-4 mt-1.5 outline-none font-bold text-indigo-950 shadow-sm text-sm md:text-base">
+        <option class="bg-white text-indigo-950" value="Không mang theo vật nuôi" data-i18n="opt_pet_no">Không</option>
+        <option class="bg-white text-indigo-950" value="Có mang theo vật nuôi" data-i18n="opt_pet_yes">Có</option>
+    </select>
+</div>
+
+<div id="pet-warning" class="col-span-2 hidden bg-amber-50 border border-amber-200 p-4 rounded-xl shadow-sm text-amber-700 font-bold text-xs md:text-sm">
+    <p data-i18n="pet_warning_text">⚠️Lưu ý: Khách sạn có thu thêm phụ phí vệ sinh/khử khuẩn khi mang theo vật nuôi. Vui lòng thông báo rõ với nhân viên khi xác nhận đặt phòng.</p>
+</div>
 
                 <div class="col-span-2 md:col-span-1">
                     <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider block" data-i18n="f_checkin">Ngày nhận phòng</label>
@@ -531,14 +534,15 @@
             }
         });
 
+// CẬP NHẬT BIẾN ĐA NGÔN NGỮ ĐẦY ĐỦ (Bao gồm Khuyến mãi cũ, số người tối đa, vật nuôi và sửa lỗi undefined)
 const i18n = {
     vi: { 
         nav_rooms: "Phòng nghỉ", nav_offers: "Khuyến mãi", nav_reviews: "Đánh giá", nav_contact: "Đặt phòng", nav_book: "Đặt ngay", 
         hero_sub: '"Nghỉ ngơi êm ái - Trọn vẹn niềm vui"', rooms_title: "Hạng Phòng Lunar", 
         price_alert: "⚠️ Không bao gồm ngày Cuối tuần & Lễ/Tết. Liên hệ Zalo để được báo giá.", 
         guests: "Người lớn", weekday: "Ngày thường", btn_choose: "CHỌN PHÒNG", btn_book_now: "ĐẶT PHÒNG NGAY", 
-        popular: "PHỔ BIẾN NHẤT", review_title: "Khách Hàng Đánh Giá", form_title: "ĐẶT PHÒNG NHANH", 
-        f_name: "Họ và Tên", f_phone: "Số điện thoại", f_room: "Hạng phòng", f_guests: "Số người", 
+        popular: "PHỔ BIẾN NHẤT", review_title: "Khách Hàng Đánh Giá", review_sub: "Trải nghiệm thực tế tại Hạ Linh Hotel", form_title: "ĐẶT PHÒNG NHANH", 
+        f_name: "Họ và Tên", f_phone: "Số điện thoại", f_room: "Hạng phòng", f_pets: "Mang theo vật nuôi?", 
         f_checkin: "Ngày nhận", f_checkout: "Ngày trả", f_submit: "XÁC NHẬN & MỞ CHAT ZALO", 
         p_unit: "Người", r1_name: "New Moon (Trăng Non)", r1_type: "Phòng Đơn Tiêu Chuẩn - 1 Giường Đôi", 
         r2_name: "Half Moon (Trăng Khuyết)", r2_type: "Phòng Đôi Tiêu Chuẩn - 2 Giường Đôi", 
@@ -549,20 +553,23 @@ const i18n = {
         c1_text: "Phòng sạch sẽ, gần biển, chủ khách sạn rất nhiệt tình. Sẽ quay lại!",
         c2_text: "Giá cả hợp lý, vị trí thuận tiện ngay trung tâm bãi sau. Rất hài lòng.",
         c3_text: "Phục vụ chuyên nghiệp, phòng đúng như hình.",
-        // Thêm nhãn mới cho mục Khuyến mãi
         offers_title: "Ưu Đãi Đặc Biệt", offers_sub: "Đặt trực tiếp để nhận ngay giá tốt nhất bãi sau",
         badge_direct: "ĐẶT TRỰC TIẾP", badge_coming: "SẮP DIỄN RA",
-        promo1_title: "Ưu đãi đặt phòng qua Zalo & Livechat", promo1_desc: "Giảm ngay 10% trên tổng hóa đơn phòng cho tất cả các ngày trong tuần khi liên hệ trực tiếp với chúng tôi qua nút Zalo hoặc cửa sổ Chat hỗ trợ góc màn hình.",
+        promo1_title: "Ưu ưu đãi đặt phòng qua Zalo & Livechat", promo1_desc: "Giảm ngay 10% trên tổng hóa đơn phòng cho tất cả các ngày trong tuần khi liên hệ trực tiếp với chúng tôi qua nút Zalo hoặc cửa sổ Chat hỗ trợ góc màn hình.",
         promo2_title: "Ưu đãi Mùa Du Lịch Hè / Combo Gia Đình", promo2_desc: "Chương trình tri ân dành riêng cho các hộ gia đình thuê từ 3 phòng trở lên hoặc lưu trú dài ngày tại Vũng Tàu. Hệ thống đang tối ưu hạn mức ưu đãi.",
-        btn_claim: "NHẬN NGAY", btn_waiting: "CHỜ KHỞI CHẠY", promo2_status: "Đang chuẩn bị..."
+        btn_claim: "NHẬN NGAY", btn_waiting: "CHỜ KHỞI CHẠY", promo2_status: "Đang chuẩn bị...",
+        // Từ khóa mới sửa đổi cho Form đặt phòng nhanh
+        opt_r1: "New Moon (Tối đa 2 người)", opt_r2: "Half Moon (Tối đa 4 người)", opt_r3: "Full Moon (Tối đa 4 người)", opt_r4: "Supernova (Tối đa 6 người)",
+        opt_pet_no: "Không", opt_pet_yes: "Có",
+        pet_warning_text: "⚠️Lưu ý: Khách sạn có thu thêm phụ phí vệ sinh/khử khuẩn khi mang theo vật nuôi. Vui lòng thông báo rõ với nhân viên khi xác nhận đặt phòng."
     },
     en: { 
         nav_rooms: "Rooms", nav_offers: "Special Offers", nav_reviews: "Reviews", nav_contact: "Booking", nav_book: "Book Now", 
         hero_sub: '"Soft Sleep - Pure Joy"', rooms_title: "Lunar Rooms", 
         price_alert: "⚠️ Weekends & Holidays excluded. Contact Zalo for rates.", 
         guests: "Adults", weekday: "Weekdays", btn_choose: "CHOOSE ROOM", btn_book_now: "BOOK NOW", 
-        popular: "MOST POPULAR", review_title: "Guest Reviews", form_title: "QUICK BOOKING", 
-        f_name: "Full Name", f_phone: "Phone", f_room: "Room Type", f_guests: "Guests", 
+        popular: "MOST POPULAR", review_title: "Guest Reviews", review_sub: "Real experiences at Ha Linh Hotel", form_title: "QUICK BOOKING", 
+        f_name: "Full Name", f_phone: "Phone", f_room: "Room Type", f_pets: "Bringing Pets?", 
         f_checkin: "Check-in", f_checkout: "Check-out", f_submit: "CONFIRM & CHAT ZALO", 
         p_unit: "Guests", r1_name: "New Moon", r1_type: "Standard Single Room", 
         r2_name: "Half Moon", r2_type: "Standard Double Room",
@@ -573,15 +580,36 @@ const i18n = {
         c1_text: "Clean rooms, near the beach, very enthusiastic host. Will come back!",
         c2_text: "Reasonable price, convenient location in the center of Back Beach. Very satisfied.",
         c3_text: "Professional service, the room looked exactly like the photos.",
-        // Thêm nhãn tiếng Anh mới
         offers_title: "Special Offers", offers_sub: "Book directly to get the best rates in Back Beach",
         badge_direct: "DIRECT BOOKING", badge_coming: "COMING SOON",
         promo1_title: "Discount for Zalo & Livechat bookings", promo1_desc: "Get an immediate 10% discount on your total room bill for all weekdays when contacting us directly via Zalo or the Livechat window.",
         promo2_title: "Summer Vacation / Family Combo Deal", promo2_desc: "Special appreciation program for families booking 3+ rooms or long-term stays in Vung Tau. Promotion rates are being optimized.",
-        btn_claim: "CLAIM NOW", btn_waiting: "COMING SOON", promo2_status: "Preparing..."
+        btn_claim: "CLAIM NOW", btn_waiting: "COMING SOON", promo2_status: "Preparing...",
+        // Từ khóa tiếng Anh mới cho Form
+        opt_r1: "New Moon (Max 2 guests)", opt_r2: "Half Moon (Max 4 guests)", opt_r3: "Full Moon (Max 4 guests)", opt_r4: "Supernova (Max 6 guests)",
+        opt_pet_no: "No, I am not bringing any", opt_pet_yes: "Yes, bringing pets (Dog / Cat...)",
+        pet_warning_text: "⚠️Alert: The hotel charges an extra cleaning/disinfection fee for pets. Please specify details when confirming with our staff."
     }
 };
 
+// THÊM HÀM LOGIC KIỂM TRA VẬT NUÔI ĐỂ ẨN/HIỆN CẢNH BÁO
+function checkPets() {
+    const petSelect = document.getElementById('pets');
+    const warningDiv = document.getElementById('pet-warning');
+    if (petSelect.value === "Có") {
+        warningDiv.classList.remove('hidden'); // Hiện cảnh báo
+    } else {
+        warningDiv.classList.add('hidden'); // Ẩn cảnh báo
+    }
+}
+
+// CẬP NHẬT LẠI HÀM HANDLE BOOKING ĐỂ BẮT DỮ LIỆU THÚ CƯNG SANG CHAT ZALO
+async function handleBooking(e) {
+    e.preventDefault();
+    const msg = `[HẠ LINH HOTEL]\n- Khách: ${document.getElementById('name').value}\n- SĐT: ${document.getElementById('phone').value}\n- Hạng phòng: ${document.getElementById('room').value}\n- Thú cưng: ${document.getElementById('pets').value}\n- Ngày ở: ${document.getElementById('checkin').value} đến ${document.getElementById('checkout').value}`;
+    try { await navigator.clipboard.writeText(msg); } catch (err) {}
+    window.open(`https://zalo.me/0365203109?text=${encodeURIComponent(msg)}`, '_blank');
+}
         let currentLang = 'vi';
         function toggleLang() {
             currentLang = currentLang === 'vi' ? 'en' : 'vi';
