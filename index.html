@@ -607,31 +607,34 @@ function checkPets() {
 
 // HÀM XỬ LÝ ĐẶT PHÒNG ĐỒNG BỘ - CHỐNG BỊ TRÌNH DUYỆT CHẶN POPUP ZALO
 function handleBooking(e) {
-    // 1. Chặn hành vi reset trang mặc định của Form
+    // 1. Chặn hành vi tải lại trang mặc định của Form
     e.preventDefault();
     
-    // 2. Lấy chính xác dữ liệu từ các ô nhập liệu
+    // 2. Thu thập dữ liệu từ các ô nhập liệu
     const name = document.getElementById('name').value;
     const phone = document.getElementById('phone').value;
-    const room = document.getElementById('room').value;
     const checkin = document.getElementById('checkin').value;
     const checkout = document.getElementById('checkout').value;
     
-    // 3. Xử lý trạng thái vật nuôi sang chữ thực chiến gửi Zalo
-    const petValue = document.getElementById('pets').value;
-    const petStatusText = (petValue === 'yes') ? "Có mang theo vật nuôi (Yêu cầu báo phí phụ thu)" : "Không mang theo vật nuôi";
+    // FIX LỖI 1: Tự động loại bỏ phần "(Mẹo: Tối đa...)" trong tên phòng
+    let roomRaw = document.getElementById('room').value;
+    const room = roomRaw.split(' (Mẹo:')[0]; // Chỉ lấy phần tên phòng sạch phía trước
 
-    // 4. Cấu trúc nội dung tin nhắn gửi đi
-    const msg = `[HẠ LINH HOTEL - ĐẶT PHÒNG NHANH]\n- Khách hàng: ${name}\n- Số điện thoại: ${phone}\n- Hạng phòng đã chọn: ${room}\n- Thú cưng đi kèm: ${petStatusText}\n- Thời gian lưu trú: Từ ngày ${checkin} đến ngày ${checkout}`;
+    // FIX LỖI 2: Ép hiển thị "Có" hoặc "Không" cố định bằng Tiếng Việt
+    const petValue = document.getElementById('pets').value;
+    const petStatusText = (petValue === 'yes') ? "Có" : "Không";
     
-    // 5. Thực hiện copy vào bộ nhớ tạm KHÔNG DÙNG AWAIT (Chạy ngầm đồng bộ)
-    try { 
-        navigator.clipboard.writeText(msg); 
+    // 3. Cấu trúc lại nội dung tin nhắn siêu sạch gửi cho khách sạn
+    const msg = `[HẠ LINH HOTEL - ĐẶT PHÒNG NHANH]\n- Khách: ${name}\n- SĐT: ${phone}\n- Hạng phòng: ${room}\n- Vật nuôi: ${petStatusText}\n- Ngày ở: ${checkin} đến ${checkout}`;
+    
+    // 4. Kích hoạt sao chép ngầm vào bộ nhớ tạm
+    try {
+        navigator.clipboard.writeText(msg);
     } catch (err) {
-        console.log("Trình duyệt không hỗ trợ tự động copy ngầm");
+        console.log("Trình duyệt không hỗ trợ sao chép tự động");
     }
     
-    // 6. Kích hoạt mở Zalo ngay lập tức (Trình duyệt sẽ không chặn vì luồng chạy đồng bộ hoàn toàn)
+    // 5. Mở tab Zalo đẩy tin nhắn đi mượt mà
     window.open(`https://zalo.me/0365203109?text=${encodeURIComponent(msg)}`, '_blank');
 }
         
