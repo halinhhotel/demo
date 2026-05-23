@@ -605,35 +605,6 @@ function checkPets() {
     }
 }
 
-// HÀM XỬ LÝ GỬI TIN NHẮN ZALO CHUẨN HOÁ HIỂN THỊ
-function handleBooking(e) {
-    e.preventDefault();
-    
-    // Thu thập dữ liệu sạch từ Form
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const room = document.getElementById('room').value; // Sẽ lấy chuẩn "Full Moon", "New Moon"...
-    const checkin = document.getElementById('checkin').value;
-    const checkout = document.getElementById('checkout').value;
-    
-    // Ép hiển thị chữ "Có" / "Không" bằng Tiếng Việt cố định, bất chấp ngôn ngữ trang web
-    const petValue = document.getElementById('pets').value;
-    const petStatusText = (petValue === 'yes') ? "Có" : "Không";
-    
-    // Xây dựng cấu trúc tin nhắn siêu sạch gửi cho khách sạn
-    const msg = `[HẠ LINH HOTEL - ĐẶT PHÒNG NHANH]\n- Khách: ${name}\n- SĐT: ${phone}\n- Hạng phòng: ${room}\n- Vật nuôi: ${petStatusText}\n- Ngày ở: ${checkin} đến ${checkout}`;
-    
-    // Kích hoạt sao chép ngầm vào bộ nhớ tạm
-    try {
-        navigator.clipboard.writeText(msg);
-    } catch (err) {
-        console.log("Trình duyệt chặn tính năng sao chép tự động");
-    }
-    
-    // Đẩy thẳng luồng dữ liệu sang ứng dụng Zalo không bị chặn popup
-    window.open(`https://zalo.me/0365203109?text=${encodeURIComponent(msg)}`, '_blank');
-}
-        
         let currentLang = 'vi';
         function toggleLang() {
             currentLang = currentLang === 'vi' ? 'en' : 'vi';
@@ -654,24 +625,28 @@ const fpConfig = {
 };
 
 <script>
+// 1. CẤU HÌNH LỊCH FLATPICKR CHẠY TRỰC TIẾP (KHÓA NGÀY A -> A+1)
+// Khai báo biến lưu trữ cấu hình lịch
+let checkinPicker, checkoutPicker;
 
-document.addEventListener("DOMContentLoaded", function() {
-    let checkinPicker, checkoutPicker;
+// Kiểm tra ngôn ngữ tiếng Việt an toàn chống crash
+const flatpickrLocale = (typeof flatpickr !== 'undefined' && flatpickr.l10ns && flatpickr.l10ns.vn) ? 'vn' : 'default';
 
+try {
     // Khởi tạo lịch Trả Phòng trước
     checkoutPicker = flatpickr("#checkout", {
-        locale: "vn",
+        locale: flatpickrLocale,
         dateFormat: "d/m/Y",
         minDate: "today"
     });
 
-    // Khởi tạo lịch Nhận Phòng sau để liên kết sang lịch Trả
+    // Khởi tạo lịch Nhận Phòng và thiết lập liên kết ràng buộc sang lịch Trả
     checkinPicker = flatpickr("#checkin", {
-        locale: "vn",
+        locale: flatpickrLocale,
         dateFormat: "d/m/Y",
         minDate: "today",
         onChange: function(selectedDates, dateStr, instance) {
-            if (selectedDates[0]) {
+            if (selectedDates[0] && checkoutPicker) {
                 // Tính toán ngày kế tiếp (Ngày nhận phòng + 1 ngày)
                 const nextDay = new Date(selectedDates[0]);
                 nextDay.setDate(nextDay.getDate() + 1);
@@ -679,33 +654,36 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Ép lịch Trả Phòng chỉ được chọn từ ngày kế tiếp trở đi
                 checkoutPicker.set("minDate", nextDay);
                 
-                // Nếu khách lỡ chọn ngày trả nhỏ hơn hoặc bằng ngày nhận, tự động xóa đi bắt chọn lại
+                // Nếu khách lỡ chọn ngày trả nhỏ hơn hoặc bằng ngày nhận, tự động xóa đi để bắt chọn lại
                 if (checkoutPicker.selectedDates[0] && checkoutPicker.selectedDates[0] <= selectedDates[0]) {
                     checkoutPicker.clear();
                 }
             }
         }
     });
-});
+} catch (err) {
+    console.log("Lỗi khởi tạo lịch: ", err);
+}
 
+// 2. HÀM XỬ LÝ GỬI TIN ZALO - SIÊU SẠCH & KHÔNG CHẶN POPUP
 function handleBooking(e) {
-    e.preventDefault(); // Chặn tải lại trang
+    e.preventDefault(); // Chặn tải lại trang mặc định
     
-    // Lấy dữ liệu thô từ các ô nhập
+    // Thu thập dữ liệu từ các ô nhập
     const name = document.getElementById('name').value;
     const phone = document.getElementById('phone').value;
     const checkin = document.getElementById('checkin').value;
     const checkout = document.getElementById('checkout').value;
     
-    // TỰ ĐỘNG LỌC PHÒNG: Cắt bỏ mọi ký tự từ dấu ngoặc đơn " (" trở đi (Chấp hết mọi loại chữ Mẹo/Tip)
+    // TỰ ĐỘNG LỌC PHÒNG: Gọt sạch mọi ký tự từ dấu ngoặc đơn trở đi
     let roomRaw = document.getElementById('room').value;
     let room = roomRaw.split(' (')[0].trim(); 
 
-    // TỰ ĐỘNG DỊCH VẬT NUÔI: Ép cứng ra chữ "Có" hoặc "Không" tiếng Việt, bất kể khách chọn ngôn ngữ nào
+    // TỰ ĐỘNG DỊCH VẬT NUÔI: Ép cứng chữ "Có" hoặc "Không" tiếng Việt cố định
     const petValue = document.getElementById('pets').value;
     const petStatusText = (petValue === 'yes') ? "Có" : "Không";
     
-    // Cấu trúc nội dung tin nhắn siêu sạch gửi cho khách sạn
+    // Cấu trúc nội dung tin nhắn gửi cho khách sạn
     const msg = `[HẠ LINH HOTEL - ĐẶT PHÒNG NHANH]\n- Khách: ${name}\n- SĐT: ${phone}\n- Hạng phòng: ${room}\n- Vật nuôi: ${petStatusText}\n- Ngày ở: ${checkin} đến ${checkout}`;
     
     // Sao chép ngầm vào bộ nhớ tạm
@@ -715,7 +693,7 @@ function handleBooking(e) {
         console.log("Trình duyệt không hỗ trợ sao chép tự động");
     }
     
-    // Mở Zalo và đẩy tin nhắn đi ngay lập tức
+    // Mở Zalo đẩy tin nhắn đi mượt mà
     window.open(`https://zalo.me/0365203109?text=${encodeURIComponent(msg)}`, '_blank');
 }
 </script>
