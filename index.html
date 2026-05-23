@@ -365,21 +365,21 @@
 
     <section id="booking" class="py-20 max-w-4xl mx-auto px-4 relative z-10">
         <div class="text-center mb-10"><h2 class="text-3xl md:text-4xl font-black font-lucky text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 uppercase tracking-widest" data-i18n="form_title">ĐẶT PHÒNG NHANH</h2></div>
-<form onsubmit="handleBooking(event)" class="w-full glass-box p-4 sm:p-6 md:p-14 rounded-[24px] md:rounded-[50px] border border-white/60 shadow-xl overflow-hidden">
-            <div class="grid grid-cols-2 gap-3 md:gap-6">
-                <div class="col-span-2 md:col-span-1 min-w-0">
+<form onsubmit="handleBooking(event)" class="w-full glass-box p-5 md:p-14 rounded-[24px] md:rounded-[50px] border border-white/60 shadow-xl box-border">
+            <div class="grid grid-cols-2 gap-4 md:gap-6">
+                <div class="col-span-2 md:col-span-1">
                     <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider" data-i18n="f_name">Tên của bạn</label>
-                    <input type="text" id="name" required class="w-full bg-white/80 border border-purple-100 rounded-2xl px-4 md:px-6 py-3 md:py-4 mt-1.5 outline-none focus:border-pink-500 font-bold transition text-indigo-950 shadow-sm text-sm md:text-base">
+                    <input type="text" id="name" required class="w-full bg-white/80 border border-purple-100 rounded-2xl px-4 md:px-6 py-3.5 md:py-4 mt-1.5 outline-none focus:border-pink-500 font-bold transition text-indigo-950 shadow-sm text-sm md:text-base">
                 </div>
                 
-                <div class="col-span-2 md:col-span-1 min-w-0">
+                <div class="col-span-2 md:col-span-1">
                     <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider" data-i18n="f_phone">Số điện thoại</label>
-                    <input type="tel" id="phone" required class="w-full bg-white/80 border border-purple-100 rounded-2xl px-4 md:px-6 py-3 md:py-4 mt-1.5 outline-none focus:border-pink-500 font-bold transition text-indigo-950 shadow-sm text-sm md:text-base">
+                    <input type="tel" id="phone" required class="w-full bg-white/80 border border-purple-100 rounded-2xl px-4 md:px-6 py-3.5 md:py-4 mt-1.5 outline-none focus:border-pink-500 font-bold transition text-indigo-950 shadow-sm text-sm md:text-base">
                 </div>
 
-                <div class="col-span-2 md:col-span-1 min-w-0">
+                <div class="col-span-2 md:col-span-1">
                     <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider" data-i18n="f_room">Hạng phòng</label>
-                    <select id="room" class="w-full bg-white border border-purple-100 rounded-2xl px-4 md:px-6 py-3 md:py-4 mt-1.5 outline-none focus:border-pink-500 font-bold text-indigo-950 shadow-sm text-sm md:text-base">
+                    <select id="room" class="w-full bg-white border border-purple-100 rounded-2xl px-4 md:px-6 py-3.5 md:py-4 mt-1.5 outline-none focus:border-pink-500 font-bold text-indigo-950 shadow-sm text-sm md:text-base">
                         <option class="bg-white text-indigo-950">New Moon (Trăng Non)</option>
                         <option class="bg-white text-indigo-950">Half Moon (Trăng Khuyết)</option>
                         <option class="bg-white text-indigo-950" selected>Full Moon (Trăng Tròn)</option>
@@ -387,31 +387,31 @@
                     </select>
                 </div>
 
-                <div class="col-span-2 md:col-span-1 min-w-0">
+                <div class="col-span-2 md:col-span-1">
                     <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider" data-i18n="f_guests">Số người</label>
-                    <select id="guests" class="w-full bg-white border border-purple-100 rounded-2xl px-4 md:px-6 py-3 md:py-4 mt-1.5 outline-none font-bold text-indigo-950 shadow-sm text-sm md:text-base">
+                    <select id="guests" class="w-full bg-white border border-purple-100 rounded-2xl px-4 md:px-6 py-3.5 md:py-4 mt-1.5 outline-none font-bold text-indigo-950 shadow-sm text-sm md:text-base">
                         <option class="bg-white text-indigo-950" value="2">2 <span data-i18n="p_unit">Người</span></option>
                         <option class="bg-white text-indigo-950" value="4">4 <span data-i18n="p_unit">Người</span></option>
                         <option class="bg-white text-indigo-950" value="6">6 <span data-i18n="p_unit">Người (Tối đa)</span></option>
                     </select>
                 </div>
 
-                <div class="col-span-1 min-w-0">
-                    <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider block truncate" data-i18n="f_checkin">Ngày nhận phòng</label>
-                    <input id="checkin" class="w-full min-w-0 bg-white/80 border border-purple-100 rounded-xl md:rounded-2xl px-2.5 md:px-6 py-3 md:py-4 mt-1.5 font-bold cursor-pointer text-indigo-950 shadow-sm text-xs sm:text-sm md:text-base truncate text-center md:text-left" readonly>
+                <div class="col-span-2 md:col-span-1">
+                    <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider block" data-i18n="f_checkin">Ngày nhận phòng</label>
+                    <input id="checkin" class="w-full bg-white/80 border border-purple-100 rounded-2xl px-4 md:px-6 py-3.5 md:py-4 mt-1.5 font-bold cursor-pointer text-indigo-950 shadow-sm text-sm md:text-base" readonly>
                 </div>
 
-                <div class="col-span-1 min-w-0">
-                    <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider block truncate" data-i18n="f_checkout">Ngày trả phòng</label>
-                    <input id="checkout" class="w-full min-w-0 bg-white/80 border border-purple-100 rounded-xl md:rounded-2xl px-2.5 md:px-6 py-3 md:py-4 mt-1.5 font-bold cursor-pointer text-indigo-950 shadow-sm text-xs sm:text-sm md:text-base truncate text-center md:text-left" readonly>
+                <div class="col-span-2 md:col-span-1">
+                    <label class="text-[10px] font-black uppercase text-indigo-950/50 ml-2 tracking-wider block" data-i18n="f_checkout">Ngày trả phòng</label>
+                    <input id="checkout" class="w-full bg-white/80 border border-purple-100 rounded-2xl px-4 md:px-6 py-3.5 md:py-4 mt-1.5 font-bold cursor-pointer text-indigo-950 shadow-sm text-sm md:text-base" readonly>
                 </div>
             </div>
 
-            <button type="submit" class="w-full bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 text-white py-3.5 md:py-5 rounded-xl md:rounded-2xl font-black text-xs sm:text-sm md:text-lg hover:opacity-95 hover:scale-[1.01] active:scale-95 transition shadow-xl shadow-purple-500/20 uppercase tracking-widest mt-5 md:mt-8" data-i18n="f_submit">
+            <button type="submit" class="w-full bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 text-white py-4 md:py-5 rounded-2xl font-black text-sm md:text-lg hover:opacity-95 hover:scale-[1.01] active:scale-95 transition shadow-xl shadow-purple-500/20 uppercase tracking-widest mt-6 md:mt-8" data-i18n="f_submit">
                 XÁC NHẬN & MỞ CHAT ZALO*
             </button>
 
-            <p class="text-[9px] md:text-[11px] text-indigo-950/60 mt-4 text-center italic leading-relaxed" data-i18n="f_note">
+            <p class="text-[10px] md:text-[11px] text-indigo-950/60 mt-4 text-center italic leading-relaxed" data-i18n="f_note">
                 (*) Sau khi nhấn, thông tin đã được tự động sao chép.<br>Bạn chỉ cần "Dán" (Paste) vào ô chat Zalo khách sạn.
             </p>
         </form>
@@ -521,9 +521,16 @@
         function slideRev(dir) { const c = document.getElementById('review-container'); c.scrollBy({ left: dir * c.clientWidth, behavior: 'smooth' }); }
         function selectRoom(name) { document.getElementById('room').value = name; document.getElementById('booking').scrollIntoView({behavior: 'smooth'}); }
 
-        flatpickr("#checkin", { dateFormat: "d/m/Y", minDate: "today", locale: "vn", defaultDate: "today" });
-        flatpickr("#checkout", { dateFormat: "d/m/Y", minDate: "today", locale: "vn", defaultDate: new Date().getTime() + 86400000 });
-
+// Cấu hình lịch Flatpickr mượt mà, định dạng gọn gàng
+        const fpConfig = {
+            locale: "vn",
+            dateFormat: "d/m/Y", // Fix hiển thị dạng ngắn gọn 23/05/2026 tránh tràn chữ
+            minDate: "today",
+            animate: true
+        };
+        flatpickr("#checkin", fpConfig);
+        flatpickr("#checkout", fpConfig);
+        
         async function handleBooking(e) {
             e.preventDefault();
             const msg = `[HẠ LINH HOTEL]\n- Khách: ${document.getElementById('name').value}\n- SĐT: ${document.getElementById('phone').value}\n- Phòng: ${document.getElementById('room').value}\n- Người: ${document.getElementById('guests').value}\n- Ngày: ${document.getElementById('checkin').value} đến ${document.getElementById('checkout').value}`;
