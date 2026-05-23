@@ -605,29 +605,33 @@ function checkPets() {
     }
 }
 
-async function handleBooking(e) {
+// HÀM XỬ LÝ ĐẶT PHÒNG ĐỒNG BỘ - CHỐNG BỊ TRÌNH DUYỆT CHẶN POPUP ZALO
+function handleBooking(e) {
+    // 1. Chặn hành vi reset trang mặc định của Form
     e.preventDefault();
     
+    // 2. Lấy chính xác dữ liệu từ các ô nhập liệu
     const name = document.getElementById('name').value;
     const phone = document.getElementById('phone').value;
     const room = document.getElementById('room').value;
     const checkin = document.getElementById('checkin').value;
     const checkout = document.getElementById('checkout').value;
     
-    // Tự động phân tích giá trị vật nuôi để xuất ra text tiếng Việt gửi Zalo
+    // 3. Xử lý trạng thái vật nuôi sang chữ thực chiến gửi Zalo
     const petValue = document.getElementById('pets').value;
     const petStatusText = (petValue === 'yes') ? "Có mang theo vật nuôi (Yêu cầu báo phí phụ thu)" : "Không mang theo vật nuôi";
 
-    // Cấu trúc nội dung tin nhắn gửi đến cổng Zalo của bạn
+    // 4. Cấu trúc nội dung tin nhắn gửi đi
     const msg = `[HẠ LINH HOTEL - ĐẶT PHÒNG NHANH]\n- Khách hàng: ${name}\n- Số điện thoại: ${phone}\n- Hạng phòng đã chọn: ${room}\n- Thú cưng đi kèm: ${petStatusText}\n- Thời gian lưu trú: Từ ngày ${checkin} đến ngày ${checkout}`;
     
+    // 5. Thực hiện copy vào bộ nhớ tạm KHÔNG DÙNG AWAIT (Chạy ngầm đồng bộ)
     try { 
-        await navigator.clipboard.writeText(msg); 
+        navigator.clipboard.writeText(msg); 
     } catch (err) {
-        console.log("Không thể tự động sao chép bộ nhớ tạm");
+        console.log("Trình duyệt không hỗ trợ tự động copy ngầm");
     }
     
-    // Kích hoạt mở tab Zalo mượt mà
+    // 6. Kích hoạt mở Zalo ngay lập tức (Trình duyệt sẽ không chặn vì luồng chạy đồng bộ hoàn toàn)
     window.open(`https://zalo.me/0365203109?text=${encodeURIComponent(msg)}`, '_blank');
 }
         
