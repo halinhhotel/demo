@@ -608,63 +608,117 @@
             }
         });
 
-// CẬP NHẬT BIẾN ĐA NGÔN NGỮ ĐẦY ĐỦ (Bao gồm Khuyến mãi cũ, số người tối đa, vật nuôi và sửa lỗi undefined)
+// CẬP NHẬT BIẾN ĐA NGÔN NGỮ ĐẦY ĐỦ VÀ CHUẨN HÓA HÀM DỊCH
 const i18n = {
-    vi: { 
-        nav_rooms: "Xem Phòng", nav_offers: "Khuyến mãi", nav_reviews: "Đánh giá", nav_contact: "Đặt phòng", btn_book: "Đặt ngay", 
-        hero_sub: '"Nghỉ ngơi êm ái - Trọn vẹn niềm vui"', rooms_title: "Hạng Phòng", 
-        price_alert: "⚠️ Giá ngày thường, thay đổi vào Cuối tuần & Lễ/Tết", 
-        guests: "Người lớn", weekday: "Ngày thường", btn_choose: "CHỌN PHÒNG", btn_book_now: "ĐẶT PHÒNG NGAY", 
-        popular: "PHỔ BIẾN NHẤT", review_title: "Khách Hàng Đánh Giá", review_sub: "Trải nghiệm thực tế tại Hạ Linh Hotel", form_title: "ĐẶT PHÒNG NHANH", 
-        f_name: "Tên của bạn", f_phone: "Số điện thoại", f_room: "Hạng phòng", f_pets: "Mang theo vật nuôi?", 
-        f_checkin: "Ngày nhận", f_checkout: "Ngày trả", f_submit: "XÁC NHẬN & MỞ CHAT ZALO", 
-        p_unit: "Người", r1_name: "Phòng Đôi Tiêu Chuẩn", r1_type: "Phòng 1 Giường Đôi", 
-        r2_name: "Phòng Bốn Tiêu Chuẩn", r2_type: "Phòng 2 Giường Đôi", 
-        r3_name: "Phòng Gia Đình Deluxe", r3_type: "Phòng Lớn Cho Gia Đình - 2 Giường Đôi", 
-        r4_name: "Phòng Đại Gia Đình", r4_type: "Phòng Tập Thể - 3 Giường Đôi",
+    vi: {
+        nav_rooms: "Xem Phòng",
+        nav_offers: "Khuyến mãi",
+        nav_reviews: "Đánh giá",
+        nav_contact: "Đặt phòng",
+        btn_book: "Đặt ngay",
+        hero_sub: '"Nghỉ ngơi êm ái - Trọn vẹn niềm vui"',
         header_sub: "Khách sạn giá tốt tại Bãi sau Vũng Tàu",
-        f_note: "(*) Sau khi nhấn, thông tin đã được tự động sao chép.<br>Bạn chỉ cần \"Dán\" (Paste) vào ô chat Zalo khách sạn.",
-        c1_text: "Phòng sạch sẽ, ngay trung tâm thuận tiện ăn uống. Chủ khách sạn nhiệt tình.",
-        c2_text: "Giá cả hợp lý, vị trí thuận tiện ngay trung tâm bãi sau. Rất hài lòng.",
-        c3_text: "Không gian yên tĩnh, deco phòng rất xinh và ấm cúng",
-        offers_title: "Ưu Đãi Đa Dạng", offers_sub: "Lựa chọn ưu đãi phù hợp để được giá tốt!",
-        badge_direct: "ĐẶT TRỰC TIẾP", badge_coming: "SẮP DIỄN RA",
-        promo1_title: "Ưu Đãi Đặt Phòng Trực Tiếp", promo1_desc: "Giảm ngay 10% tiền phòng khi đặt qua Zalo/Facebook/Hotline. Lưu ý: chỉ liên hệ qua các kênh hỗ trợ có hiển thị trên web để tránh bị lừa đảo!",
-        promo2_title: "Hè Rực Rỡ - Reset Sau Giờ Thi", promo2_desc: "Chương trình ưu đãi cực nhiệt dành riêng cho khối nghỉ hè dưới 15 tuổi và gia đình xả stress sau mùa học tập căng thẳng, giảm sâu tiền phòng lên đến 15%!",
-        promo3_title: "Combo Gia Đình - Không Lo Về Giá", promo3_desc: "Chương trình giảm sâu (lên đến 20%) dành cho các hộ gia đình thuê từ 3 phòng trở lên hoặc lưu trú dài ngày tại Vũng Tàu. Liên hệ để được tư vấn!",
-        btn_claim: "NHẬN NGAY", btn_waiting: "CHỜ KHỞI CHẠY", promo1_status: "-10 TIỀN PHÒNG", promo2_status: "Đang chuẩn bị...", promo3_status: "Đang chuẩn bị..."
-        // Từ khóa mới sửa đổi cho Form đặt phòng nhanh
-        opt_r1: "Phòng Đôi (2 người)", opt_r2: "Phòng Bốn (4 người)", opt_r3: "Phòng Gia Đình (4 người)", opt_r4: "Phòng Đại Gia Đình (6 người)",
-        opt_pet_no: "Không mang theo", opt_pet_yes: "Có mang theo",
+        rooms_title: "Hạng Phòng",
+        price_alert: "⚠️ Giá ngày thường, thay đổi vào Cuối tuần & Lễ/Tết",
+        guests: "Người lớn",
+        weekday: "Ngày thường",
+        btn_choose: "CHỌN PHÒNG",
+        btn_book_now: "ĐẶT PHÒNG NGAY",
+        popular: "PHỔ BIẾN NHẤT",
+        review_title: "Khách Hàng Đánh Giá",
+        review_sub: "Trải nghiệm thực tế tại Hạ Linh Hotel",
+        form_title: "ĐẶT PHÒNG NHANH",
+        f_name: "Tên của bạn",
+        f_phone: "Số điện thoại",
+        f_room: "Hạng phòng",
+        f_pets: "Mang theo vật nuôi?",
+        f_checkin: "Ngày nhận",
+        f_checkout: "Ngày trả",
+        f_submit: "XÁC NHẬN & MỞ CHAT ZALO",
+        p_unit: "Người",
+        r1_name: "Phòng Đôi Tiêu Chuẩn",
+        r1_type: "Phòng 1 Giường Đôi",
+        r2_name: "Phòng Bốn Tiêu Chuẩn",
+        r2_type: "Phòng 2 Giường Đôi",
+        r3_name: "Phòng Gia Đình Deluxe",
+        r3_type: "Phòng Lớn Cho Gia Đình - 2 Giường Đôi",
+        r4_name: "Phòng Đại Gia Đình",
+        r4_type: "Phòng Tập Thể - 3 Giường Đôi",
+        badge_direct: "ĐANG DIỄN RA",
+        badge_coming: "CHỜ KHỞI CHẠY",
+        promo1_title: "Ưu Đãi Đặt Phòng Trực Tiếp",
+        promo1_desc: "Giảm ngay 10% tiền phòng khi đặt qua Zalo/Facebook/Hotline. Lưu ý: chỉ liên hệ qua các kênh hỗ trợ có hiển thị trên web để tránh bị lừa đảo!",
+        promo2_title: "Hè Rực Rỡ - Reset Sau Giờ Thi",
+        promo2_desc: "Chương trình ưu đãi cực nhiệt dành riêng cho khối nghỉ hè dưới 15 tuổi và gia đình xả stress sau mùa học tập căng thẳng, giảm sâu tiền phòng lên đến 15%!",
+        promo3_title: "Combo Gia Đình - Không Lo Về Giá",
+        promo3_desc: "Chương trình giảm sâu (lên đến 20%) dành cho các hộ gia đình thuê từ 3 phòng trở lên hoặc lưu trú dài ngày tại Vũng Tàu. Liên hệ để được tư vấn!",
+        btn_claim: "NHẬN NGAY",
+        btn_waiting: "CHỜ KHỞI CHẠY",
+        promo1_status: "-10% TIỀN PHÒNG",
+        promo2_status: "Đang chuẩn bị...",
+        promo3_status: "Đang chuẩn bị...",
+        opt_r1: "Phòng Đôi (2 người)",
+        opt_r2: "Phòng Bốn (4 người)",
+        opt_r3: "Phòng Gia Đình (4 người)",
+        opt_r4: "Phòng Đại Gia Đình (6 người)",
+        opt_pet_no: "Không mang theo",
+        opt_pet_yes: "Có mang theo",
         pet_warning_text: "⚠️Lưu ý: Khách sạn có thu thêm phụ phí vệ sinh/khử khuẩn khi mang theo vật nuôi. Vui lòng thông báo rõ với nhân viên khi xác nhận đặt phòng."
     },
-en: { 
-        nav_rooms: "Rooms", nav_offers: "Promotions", nav_reviews: "Reviews", nav_contact: "Booking", btn_book: "Book Now", 
-        hero_sub: '"Cozy Rest - Complete Joy"', rooms_title: "Room Types", 
-        price_alert: "⚠️ Weekday rates; prices vary on Weekends, Holidays & Festivals", 
-        guests: "Adults", weekday: "Weekdays", btn_choose: "CHOOSE ROOM", btn_book_now: "BOOK NOW", 
-        popular: "MOST POPULAR", review_title: "Customer Reviews", review_sub: "Real experiences at Ha Linh Hotel", form_title: "QUICK BOOKING", 
-        f_name: "Your name", f_phone: "Phone number", f_room: "Room type", f_pets: "Bring pets?", 
-        f_checkin: "Check-in date", f_checkout: "Check-out date", f_submit: "CONFIRM & OPEN ZALO CHAT", 
-        p_unit: "Guests", r1_name: "Standard Double Room", r1_type: "1 Double Bed Room", 
-        r2_name: "Standard Quad Room", r2_type: "2 Double Beds Room", 
-        r3_name: "Deluxe Family Room", r3_type: "Large Family Room - 2 Double Beds", 
-        r4_name: "Grand Family Room", r4_type: "Dorm Room - 3 Double Beds",
-        header_sub: "Best budget hotel at Back Beach, Vung Tau",
-        f_note: "(*) After clicking, your information is automatically copied.<br>You just need to \"Paste\" it into the hotel's Zalo chat box.",
-        c1_text: "Clean rooms, right in the center, very convenient for dining. The hotel owner is extremely enthusiastic.",
-        c2_text: "Reasonable prices, convenient location right in the center of Back Beach. Very satisfied.",
-        c3_text: "Quiet atmosphere, very pretty and cozy room decor.",
-        offers_title: "Diverse Offers", offers_sub: "Choose the right promotion to get the best price!",
-        badge_direct: "DIRECT BOOKING", badge_coming: "LAUNCHING SOON",
-        promo1_title: "Direct Booking Promotion", promo1_desc: "Get an instant 10% off your room rate when booking via Zalo/Facebook/Hotline. Note: only contact via the support channels displayed on our website to avoid scams!",
-        promo2_title: "Bright Summer - Reset After Exams", promo2_desc: "A sizzling promotion dedicated to summer break students under 15 and families to destress after a hectic school year. Deep room discounts up to 15%!",
-        promo3_title: "Family Combo - No Price Worries", promo3_desc: "Deep discount program (up to 20%) for families renting 3 or more rooms or staying long-term in Vung Tau. Contact us for advice!",
-        btn_claim: "CLAIM NOW", btn_waiting: "LAUNCHING SOON", promo1_status: "-10% ROOM RATE", promo2_status: "Preparing...", promo3_status: "Preparing...",
-        // Modified keywords for Quick Booking Form
-        opt_r1: "Double Room (Standard 2 guests)", opt_r2: "Quad Room (Standard 4 guests)", opt_r3: "Family Room (Standard 4 guests)", opt_r4: "Grand Family Room (Standard 6 guests)",
-        opt_pet_no: "No", opt_pet_yes: "Yes",
-        pet_warning_text: "⚠️Note: The hotel charges an additional cleaning/disinfection fee when bringing pets. Please clearly inform our staff upon booking confirmation."
+    en: {
+        nav_rooms: "Rooms",
+        nav_offers: "Promotions",
+        nav_reviews: "Reviews",
+        nav_contact: "Booking",
+        btn_book: "Book Now",
+        hero_sub: '"Cozy Rest - Complete Joy"',
+        header_sub: "Good budget hotel at Vung Tau Back Beach",
+        rooms_title: "Room Types",
+        price_alert: "⚠️ Weekday rates; prices vary on Weekends, Holidays & Festivals",
+        guests: "Adults",
+        weekday: "Weekdays",
+        btn_choose: "CHOOSE ROOM",
+        btn_book_now: "BOOK NOW",
+        popular: "MOST POPULAR",
+        review_title: "Customer Reviews",
+        review_sub: "Real experiences at Ha Linh Hotel",
+        form_title: "QUICK BOOKING",
+        f_name: "Your name",
+        f_phone: "Phone number",
+        f_room: "Room type",
+        f_pets: "Bring pets?",
+        f_checkin: "Check-in date",
+        f_checkout: "Check-out date",
+        f_submit: "CONFIRM & OPEN ZALO CHAT",
+        p_unit: "Guests",
+        r1_name: "Standard Double Room",
+        r1_type: "Standard Double - 1 Double Bed",
+        r2_name: "Standard Quad Room",
+        r2_type: "Standard Quad - 2 Double Beds",
+        r3_name: "Family Deluxe Room",
+        r3_type: "Family Room - 2 Large Beds",
+        r4_name: "Grand Family Room",
+        r4_type: "Group Room - 3 Double Beds",
+        badge_direct: "ONGOING",
+        badge_coming: "LAUNCHING SOON",
+        promo1_title: "Direct Booking Promotion",
+        promo1_desc: "Get an instant 10% off your room rate when booking via Zalo/Facebook/Hotline. Note: only contact via the support channels displayed on our website to avoid scams!",
+        promo2_title: "Bright Summer - Reset After Exams",
+        promo2_desc: "A sizzling promotion dedicated to summer break students under 15 and families to destress after a hectic school year. Deep room discounts up to 15%!",
+        promo3_title: "Family Combo - No Price Worries",
+        promo3_desc: "Deep discount program (up to 20%) for families renting 3 or more rooms or staying long-term in Vung Tau. Contact us for advice!",
+        btn_claim: "CLAIM NOW",
+        btn_waiting: "LAUNCHING SOON",
+        promo1_status: "-10% ROOM RATE",
+        promo2_status: "Preparing...",
+        promo3_status: "Preparing...",
+        opt_r1: "Double Room (Standard 2 guests)",
+        opt_r2: "Quad Room (Standard 4 guests)",
+        opt_r3: "Family Room (Standard 4 guests)",
+        opt_r4: "Grand Family Room (Standard 6 guests)",
+        opt_pet_no: "No",
+        opt_pet_yes: "Yes",
+        pet_warning_text: "⚠️Note: The hotel charges an additional cleaning fee for pets. Please clearly inform staff upon confirmation."
     }
 };
 
@@ -681,18 +735,33 @@ function checkPets() {
     }
 }
 
+let currentLang = 'vi';
+function toggleLang() {
+    currentLang = currentLang === 'vi' ? 'en' : 'vi';
+    document.getElementById('lang-text').innerText = currentLang.toUpperCase();
+    document.getElementById('flag-icon').src = currentLang === 'vi' ? 'https://flagcdn.com/w20/vn.png' : 'https://flagcdn.com/w20/us.png';
+    
+    // VÒNG LẶP DỊCH AN TOÀN - CHỐNG ĐƠ CHỨC NĂNG
+    document.querySelectorAll('[data-i18n]').forEach(el => { 
+        const key = el.getAttribute('data-i18n');
         
-        let currentLang = 'vi';
-        function toggleLang() {
-            currentLang = currentLang === 'vi' ? 'en' : 'vi';
-            document.getElementById('lang-text').innerText = currentLang.toUpperCase();
-            document.getElementById('flag-icon').src = currentLang === 'vi' ? 'https://flagcdn.com/w20/vn.png' : 'https://flagcdn.com/w20/us.png';
-            document.querySelectorAll('[data-i18n]').forEach(el => { el.innerHTML = i18n[currentLang][el.getAttribute('data-i18n')]; });
+        // Chỉ dịch khi từ khóa thực sự tồn tại trong bộ từ điển i18n
+        if (i18n[currentLang] && i18n[currentLang][key]) { 
+            // Nếu là thẻ input và có placeholder, tiến hành dịch placeholder
+            if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
+                el.setAttribute('placeholder', i18n[currentLang][key]);
+            } else {
+                // Dùng innerHTML để dịch mượt mà cả các tag xuống dòng <br> nếu có
+                el.innerHTML = i18n[currentLang][key]; 
+            }
         }
+    });
+}
 
-        function changeImg(roomId, src, el) { document.getElementById(`img-${roomId}`).src = src; el.parentElement.querySelectorAll('.thumb-img').forEach(img => img.classList.remove('active')); el.classList.add('active'); }
-        function slideRev(dir) { const c = document.getElementById('review-container'); c.scrollBy({ left: dir * c.clientWidth, behavior: 'smooth' }); }
-        function selectRoom(name) { document.getElementById('room').value = name; document.getElementById('booking').scrollIntoView({behavior: 'smooth'}); }
+// Giữ nguyên các hàm bổ trợ thực chiến khác của bro bên dưới
+function changeImg(roomId, src, el) { document.getElementById(`img-${roomId}`).src = src; el.parentElement.querySelectorAll('.thumb-img').forEach(img => img.classList.remove('active')); el.classList.add('active'); }
+function slideRev(dir) { const c = document.getElementById('review-container'); c.scrollBy({ left: dir * c.clientWidth, behavior: 'smooth' }); }
+function selectRoom(name) { document.getElementById('room').value = name; document.getElementById('booking').scrollIntoView({behavior: 'smooth'}); }
 
 // CẤU HÌNH LỊCH THỰC CHIẾN: NHẬN PHÒNG (A) -> TRẢ PHÒNG (A + 1 trở đi)
 // 1. Khởi tạo lịch Trả Phòng trước để tạo biến tham chiếu
@@ -788,6 +857,19 @@ window.addEventListener('scroll', () => {
             setTimeout(() => icon.remove(), 25000);
         }, 3000);
     </script>
-
+// SỰ KIỆN CUỘN TRANG HIỂN THỊ NÚT BACK TO TOP KHÔNG LỖI
+window.addEventListener('scroll', () => {
+    const btt = document.getElementById('backToTop');
+    if (btt) {
+        if (window.scrollY > 300) {
+            btt.style.opacity = '1';
+            btt.style.pointerEvents = 'auto'; // Cho phép click
+        } else {
+            btt.style.opacity = '0';
+            btt.style.pointerEvents = 'none'; // Ẩn hẳn tương tác
+        }
+    }
+});
+    
 </body>
 </html>
