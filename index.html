@@ -264,7 +264,7 @@
         </div>
     </section>
 
-    <section id="rooms" class="py-12 md:py-20 max-w-7xl mx-auto px-4 relative z-10">
+   <section id="rooms" class="py-12 md:py-20 max-w-7xl mx-auto px-4 relative z-10">
         <div class="mb-10 md:mb-16 text-center">
             <h2 class="text-3xl md:text-6xl font-extrabold text-indigo-950 mb-4 md:mb-6 tracking-tight" data-i18n="rooms_title">Hạng Phòng</h2>
             <div class="inline-block bg-rose-50 border border-rose-200 px-4 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl shadow-sm">
@@ -273,6 +273,7 @@
         </div>
 
         <div class="grid gap-12 md:gap-16">
+            <!-- PHÒNG ĐÔI TIÊU CHUẨN -->
             <div class="glass-box rounded-[30px] md:rounded-[40px] overflow-hidden grid lg:grid-cols-2 hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
                 <div class="p-4 md:p-8 space-y-4">
                     <div class="h-[250px] md:h-[350px] overflow-hidden rounded-2xl md:rounded-3xl shadow-inner">
@@ -301,6 +302,7 @@
                 </div>
             </div>
 
+            <!-- PHÒNG BỐN TIÊU CHUẨN (ĐÃ SỬA LỖI THIẾU THẺ ĐÓNG DIV) -->
             <div class="glass-box rounded-[30px] md:rounded-[40px] overflow-hidden grid lg:grid-cols-2 border-2 border-pink-400/70 relative shadow-xl shadow-pink-500/5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
                 <div class="absolute top-6 left-6 z-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black tracking-widest shadow-md" data-i18n="popular">PHỔ BIẾN NHẤT</div>
                 <div class="p-4 md:p-8 space-y-4">
@@ -326,8 +328,11 @@
                             <div class="text-[10px] text-pink-600 font-bold uppercase tracking-wider mt-1" data-i18n="weekday">Ngày thường</div>
                         </div>
                     </div>
-<button onclick="selectRoom('Phòng Bốn Tiêu Chuẩn')" class="mt-8 bg-gradient-to-r from-pink-500 to-purple-600 text-white py-5 rounded-2xl font-black text-lg hover:opacity-95 hover:scale-[1.01] transition-all duration-300 shadow-lg shadow-purple-500/20 uppercase tracking-wider" data-i18n="btn_book_now">ĐẶT PHÒNG NGAY</button>            </div>
+                    <button onclick="selectRoom('Phòng Bốn Tiêu Chuẩn')" class="mt-8 bg-gradient-to-r from-pink-500 to-purple-600 text-white py-5 rounded-2xl font-black text-lg hover:opacity-95 hover:scale-[1.01] transition-all duration-300 shadow-lg shadow-purple-500/20 uppercase tracking-wider" data-i18n="btn_book_now">ĐẶT PHÒNG NGAY</button>
+                </div>
+            </div>
 
+            <!-- PHÒNG GIA ĐÌNH DELUXE -->
             <div class="glass-box rounded-[30px] md:rounded-[40px] overflow-hidden grid lg:grid-cols-2 hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
                 <div class="p-4 md:p-8 space-y-4">
                     <div class="h-[250px] md:h-[350px] overflow-hidden rounded-2xl md:rounded-3xl shadow-md">
@@ -352,9 +357,11 @@
                             <div class="text-[10px] text-indigo-950/50 font-bold uppercase tracking-wider mt-1" data-i18n="weekday">Ngày thường</div>
                         </div>
                     </div>
-<button onclick="selectRoom('Phòng Gia Đình Deluxe')" class="mt-8 bg-gradient-to-r from-pink-500 to-purple-600 text-white py-4 rounded-2xl font-bold text-sm hover:opacity-95 hover:scale-[1.01] transition-all duration-300 shadow-md uppercase tracking-wide" data-i18n="btn_book_now">ĐẶT PHÒNG NGAY</button>                </div>
+                    <button onclick="selectRoom('Phòng Gia Đình Deluxe')" class="mt-8 bg-gradient-to-r from-pink-500 to-purple-600 text-white py-4 rounded-2xl font-bold text-sm hover:opacity-95 hover:scale-[1.01] transition-all duration-300 shadow-md uppercase tracking-wide" data-i18n="btn_book_now">ĐẶT PHÒNG NGAY</button>
+                </div>
             </div>
 
+            <!-- PHÒNG ĐẠI GIA ĐÌNH -->
             <div class="glass-box rounded-[30px] md:rounded-[40px] overflow-hidden grid lg:grid-cols-2 hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
                 <div class="p-4 md:p-8 space-y-4">
                     <div class="h-[250px] md:h-[350px] overflow-hidden rounded-2xl md:rounded-3xl shadow-inner">
@@ -674,35 +681,6 @@ function checkPets() {
     }
 }
 
-// HÀM XỬ LÝ ĐẶT PHÒNG ĐỒNG BỘ - CHỐNG BỊ TRÌNH DUYỆT CHẶN POPUP ZALO
-function handleBooking(e) {
-    // 1. Chặn hành vi reset trang mặc định của Form
-    e.preventDefault();
-    
-    // 2. Lấy chính xác dữ liệu từ các ô nhập liệu
-    const name = document.getElementById('name').value;
-    const phone = document.getElementById('phone').value;
-    const room = document.getElementById('room').value;
-    const checkin = document.getElementById('checkin').value;
-    const checkout = document.getElementById('checkout').value;
-    
-    // 3. Xử lý trạng thái vật nuôi sang chữ thực chiến gửi Zalo
-    const petValue = document.getElementById('pets').value;
-    const petStatusText = (petValue === 'yes') ? "Có mang theo vật nuôi (Yêu cầu báo phí phụ thu)" : "Không mang theo vật nuôi";
-
-    // 4. Cấu trúc nội dung tin nhắn gửi đi
-    const msg = `[HẠ LINH HOTEL - ĐẶT PHÒNG NHANH]\n- Khách hàng: ${name}\n- Số điện thoại: ${phone}\n- Hạng phòng đã chọn: ${room}\n- Thú cưng đi kèm: ${petStatusText}\n- Thời gian lưu trú: Từ ngày ${checkin} đến ngày ${checkout}`;
-    
-    // 5. Thực hiện copy vào bộ nhớ tạm KHÔNG DÙNG AWAIT (Chạy ngầm đồng bộ)
-    try { 
-        navigator.clipboard.writeText(msg); 
-    } catch (err) {
-        console.log("Trình duyệt không hỗ trợ tự động copy ngầm");
-    }
-    
-    // 6. Kích hoạt mở Zalo ngay lập tức (Trình duyệt sẽ không chặn vì luồng chạy đồng bộ hoàn toàn)
-    window.open(`https://zalo.me/0365203109?text=${encodeURIComponent(msg)}`, '_blank');
-}
         
         let currentLang = 'vi';
         function toggleLang() {
@@ -748,12 +726,12 @@ const checkinPicker = flatpickr("#checkin", {
     }
 });
         
-// THAY THẾ TOÀN BỘ HÀM HANDLEBOOKING CŨ BẰNG ĐOẠN ĐỒNG BỘ NÀY:
+// HÀM XỬ LÝ ĐẶT PHÒNG DUY NHẤT & CHUẨN HÓA TIN NHẮN ZALO
 function handleBooking(e) {
-    // 1. Ngăn chặn hành vi tải lại trang mặc định của Form
+    // 1. Chặn hành vi tải lại trang mặc định của Form
     e.preventDefault();
     
-    // 2. Thu thập chính xác toàn bộ dữ liệu khách nhập
+    // 2. Thu thập chính xác toàn bộ dữ liệu từ các ô input/select
     const name = document.getElementById('name').value;
     const phone = document.getElementById('phone').value;
     const room = document.getElementById('room').value;
@@ -761,19 +739,23 @@ function handleBooking(e) {
     const checkin = document.getElementById('checkin').value;
     const checkout = document.getElementById('checkout').value;
     
-    // 3. Thiết lập nội dung tin nhắn cấu trúc sạch gửi Zalo
-    const msg = `[HẠ LINH HOTEL - ĐẶT PHÒNG NHANH]\n- Khách: ${name}\n- SĐT: ${phone}\n- Hạng phòng: ${room}\n- Vật nuôi: ${pets}\n- Ngày ở: ${checkin} đến ${checkout}`;
+    // 3. Viết lại trạng thái vật nuôi sang chữ thực chiến để gửi đi
+    const petStatusText = (pets === 'yes') ? "Có mang theo vật nuôi (Cần báo phí phụ thu)" : "Không mang theo";
     
-    // 4. Kích hoạt sao chép ngầm vào bộ nhớ tạm (Không dùng await để lách bộ chặn popup)
+    // 4. Thiết lập nội dung tin nhắn cấu trúc sạch sẽ, gọn gàng
+    const msg = `[HẠ LINH HOTEL - ĐẶT PHÒNG NHANH]\n- Khách hàng: ${name}\n- Số điện thoại: ${phone}\n- Hạng phòng: ${room}\n- Vật nuôi: ${petStatusText}\n- Thời gian: Từ ${checkin} đến ${checkout}`;
+    
+    // 5. Kích hoạt sao chép ngầm vào bộ nhớ tạm (Giữ nguyên luồng đồng bộ chống chặn Popup)
     try {
         navigator.clipboard.writeText(msg);
     } catch (err) {
-        console.log("Trình duyệt không hỗ trợ sao chép tự động");
+        console.log("Trình duyệt không hỗ trợ sao chép tự động ngầm");
     }
     
-    // 5. Mở tab Zalo ngay lập tức - Bảo đảm mượt mà trên cả Mobile và Desktop
+    // 6. Mở tab chat Zalo mượt mà trên cả Mobile và PC
     window.open(`https://zalo.me/0365203109?text=${encodeURIComponent(msg)}`, '_blank');
 }
+        
         // Back to top logic
 const btt = document.getElementById('backToTop');
 window.addEventListener('scroll', () => { 
